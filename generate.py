@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from flask import Flask, render_template, redirect, url_for
 import functools
 import subprocess
 from decimal import *
@@ -9,8 +10,13 @@ import pystache
 import misc
 from entities import *
 
+app = Flask(__name__)
 locale.setlocale(locale.LC_ALL, 'ru_RU.utf8')
 getcontext().rounding = ROUND_HALF_EVEN
+
+@app.route('/')
+def home():
+    return render_template('index.html')
 
 class bcolors:
     HEADER = '\033[95m'
@@ -64,6 +70,7 @@ if len(myAccounts) == 0 :
     session.commit()
     myAccounts = session.query(BankAccount).filter_by(agentId=1).all()
 
+'''
 data = {}
 items = []
 doctype = inputint('Doc type\n 1: invoice\n 2: job')
@@ -113,3 +120,7 @@ else:
 
 
 subprocess.call(['xelatex', './'+outputFile])
+'''
+if __name__ == '__main__':
+    app.debug = True
+    app.run(host='0.0.0.0')

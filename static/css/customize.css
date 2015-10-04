@@ -1,0 +1,8 @@
+svg {
+    width: 90%;
+}
+
+#gauges li{
+    list-style: none;
+    font-size: 3.5em;
+}
